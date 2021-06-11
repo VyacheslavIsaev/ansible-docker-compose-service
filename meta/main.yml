@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: enable_docker_compose_service
   author: Viacheslav Isaev
   description: Enables Linux host for docker-compose services hosting.
 

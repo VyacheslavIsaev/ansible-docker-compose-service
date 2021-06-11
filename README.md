@@ -14,7 +14,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - role: ViacheslavIsaev.docker-compose-service
+         - role: ViacheslavIsaev.enable_docker_compose_service
 
 License
 -------
