@@ -1,0 +1,8 @@
+---
+# tasks file for docker-compose-service
+
+- name: Deploying service
+  copy:
+    src: docker-compose@.service
+    dest: /etc/systemd/system/
+    mode: 0644
