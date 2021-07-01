@@ -20,7 +20,7 @@ ExecStartPre=-/bin/bash -c 'docker network ls -qf "name=%i_" | xargs docker netw
 ExecStartPre=-/bin/bash -c 'docker ps -aqf "name=%i_*" | xargs docker rm'
 
 ## Compose up
-{% if env_file is defined and variable|length %}
+{% if env_file is defined and env_file|length %}
 ExecStart=/usr/local/bin/docker-compose --env-file {{env_file}} up
 {% else %}
 ExecStart=/usr/local/bin/docker-compose up
