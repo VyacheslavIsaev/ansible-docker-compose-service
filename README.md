@@ -9,12 +9,18 @@ Requirements
 
 Docker and docker-compose installed.
 
+Role Variables
+--------------
+env_file: "/etc/docker/compose/.env"
+
 Example Playbook
 ----------------
 
     - hosts: servers
       roles:
          - role: ViacheslavIsaev.enable_docker_compose_service
+           vars:
+              env_file: ""
 
 License
 -------

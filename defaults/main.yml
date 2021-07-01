@@ -1,2 +1,3 @@
 ---
 # defaults file for docker-compose-service
+env_file: "/etc/docker/compose/.env"
