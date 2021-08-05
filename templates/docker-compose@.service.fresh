@@ -12,6 +12,8 @@ Restart=always
 
 WorkingDirectory=/etc/docker/compose/%i
 
+## Remove old containers, images and volumes
+#ExecStartPre=/usr/local/bin/docker-compose down -v
 ## Remove old containers
 ExecStartPre=/usr/local/bin/docker-compose down
 ## Remove any anonymous volumes attached to containers
@@ -28,6 +30,9 @@ ExecStart=/usr/local/bin/docker-compose --env-file {{env_file}} up
 ExecStart=/usr/local/bin/docker-compose up
 {% endif %}
 
+## Compose down, remove containers and volumes
+# Stop and Remove named volumes
+# ExecStop=/usr/local/bin/docker-compose down
 # Stop container keep named volumes
 ExecStop=/usr/local/bin/docker-compose down
 
