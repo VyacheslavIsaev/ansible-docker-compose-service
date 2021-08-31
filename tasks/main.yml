@@ -20,7 +20,7 @@
 
 - name: Deploying environment file
   template:
-    path: "{{env_file}}"
+    src:  "{{env_file}}"
     dest: "{{target_env_file}}"
   when: env_file != ""
 
