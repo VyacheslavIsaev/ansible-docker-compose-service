@@ -1,0 +1,29 @@
+## /etc/systemd/docker-compose@.service
+## From:
+##
+
+[Unit]
+Description=%i service by docker-compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+
+WorkingDirectory=/etc/docker/compose/%i
+
+ExecStartPre={{tools_path}}/pre-start.sh /etc/docker/compose/%i/service.conf %i
+
+## Compose up
+{% if env_file is defined and env_file|length %}
+ExecStart=/usr/local/bin/docker-compose --env-file {{target_env_file}} up
+{% else %}
+ExecStart=/usr/local/bin/docker-compose up
+{% endif %}
+
+# Stop container
+ExecStop={{tools_path}}/stop.sh /etc/docker/compose/%i/service.conf
+
+[Install]
+WantedBy=multi-user.target
+

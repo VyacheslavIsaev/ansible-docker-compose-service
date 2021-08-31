@@ -1,5 +1,28 @@
 ---
 # tasks file for docker-compose-service
+- name: Creating tools directory
+  file:
+    path: "{{tools_path}}/"
+    status: "directory"
+
+- name: Deploying tools
+  template:
+    src: "{{item}}"
+    dest: "{{tools_path}}/"
+  with_items:
+    - "pre-start.sh"
+    - "stop.sh"
+
+- name: Creating servcies root folder
+  file:
+    path: "{{services_root}}/"
+    status: "directory"
+
+- name: Deploying environment file
+  template:
+    path: "{{env_file}}"
+    dest: "{{target_env_file}}"
+  when: env_file != ""
 
 - name: Deploying service
   template:

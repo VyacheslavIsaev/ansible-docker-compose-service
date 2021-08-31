@@ -1,3 +1,6 @@
 ---
 # defaults file for docker-compose-service
 env_file: ""
+services_root: "/etc/docker/compose/"
+tools_path: "/etc/docker/compose/service_tools"
+target_env_file: "{{services_root}}/.env"
