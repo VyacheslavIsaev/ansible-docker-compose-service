@@ -3,7 +3,7 @@
 - name: Creating tools directory
   file:
     path: "{{tools_path}}/"
-    status: "directory"
+    state: "directory"
 
 - name: Deploying tools
   template:
@@ -16,7 +16,7 @@
 - name: Creating servcies root folder
   file:
     path: "{{services_root}}/"
-    status: "directory"
+    state: "directory"
 
 - name: Deploying environment file
   template:
