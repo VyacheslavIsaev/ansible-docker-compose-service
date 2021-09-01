@@ -9,6 +9,7 @@
   template:
     src: "{{item}}"
     dest: "{{tools_path}}/"
+    mode: 0744
   with_items:
     - "pre-start.sh"
     - "stop.sh"
