@@ -4,7 +4,9 @@ if [[ -f "$1" ]]; then
     source $1
 fi
 
-echo "Service name: $2"
+NAME=$2
+
+echo "Service name: $NAME"
 
 ## Remove old containers, images and volumes
 if [ "$REMOVE_VOLUMES" = true ]; then
@@ -15,15 +17,21 @@ else
 fi
 
 ## Remove any anonymous volumes attached to containers
+## By default, anonymous volumes attached to containers are not removed. 
+## You can override this with -v.
 /usr/local/bin/docker-compose rm -fv
 
 ## Remove named volumes
 if [ "$REMOVE_VOLUMES" = true ]; then
-    /bin/bash -c 'docker volumes ls -qf "name='$2'_" | xargs docker volume rm'
+    /bin/bash -c 'docker volumes ls -qf "name='$NAME'_" | xargs docker volume rm'
 fi
 
 if [ "$REMOVE_NETWORK" = true ]; then
-    /bin/bash -c 'docker network ls -qf "name='$2'_" | xargs docker network rm'
+    /bin/bash -c 'docker network ls -qf "name='$NAME'_" | xargs docker network rm'
 fi
 
-/bin/bash -c 'docker ps -aqf "name='$2'_*" | xargs docker rm'
+$OLD_CONTAINERS=$(docker ps -aqf "name=$NAME_*" | wc -l)
+
+if [ "$OLD_CONTAINERS" -gt "0" ]; then
+    /bin/bash -c 'docker ps -aqf "name='$NAME'_*" | xargs docker rm'
+fi
