@@ -5,7 +5,7 @@ if [[ -f "$1" ]]; then
 fi
 
 ## Remove old containers, images and volumes
-if [ "$REMOVE_VOLUMES" = true]; then
+if [ "$REMOVE_VOLUMES" = true ]; then
     /usr/local/bin/docker-compose down -v
 else
     ## Remove old containers
@@ -16,13 +16,12 @@ fi
 /usr/local/bin/docker-compose rm -fv
 
 ## Remove named volumes
-if [ "$REMOVE_VOLUMES" = true]; then
+if [ "$REMOVE_VOLUMES" = true ]; then
     /bin/bash -c 'docker volumes ls -qf "name=$2_" | xargs docker volume rm'
 fi
 
-if [ "$REMOVE_NETWORK" = true]; then
+if [ "$REMOVE_NETWORK" = true ]; then
     /bin/bash -c 'docker network ls -qf "name=$2_" | xargs docker network rm'
 fi
 
 /bin/bash -c 'docker ps -aqf "name=$2_*" | xargs docker rm'
-
