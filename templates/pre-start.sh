@@ -30,7 +30,7 @@ if [ "$REMOVE_NETWORK" = true ]; then
     /bin/bash -c 'docker network ls -qf "name='$NAME'_" | xargs docker network rm'
 fi
 
-$OLD_CONTAINERS=$(docker ps -aqf "name=$NAME_*" | wc -l)
+OLD_CONTAINERS=$(docker ps -aqf "name=$NAME_*" | wc -l)
 
 if [ "$OLD_CONTAINERS" -gt "0" ]; then
     /bin/bash -c 'docker ps -aqf "name='$NAME'_*" | xargs docker rm'
