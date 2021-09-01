@@ -4,6 +4,8 @@ if [[ -f "$1" ]]; then
     source $1
 fi
 
+echo "Service name: $2"
+
 ## Remove old containers, images and volumes
 if [ "$REMOVE_VOLUMES" = true ]; then
     /usr/local/bin/docker-compose down -v
@@ -17,11 +19,11 @@ fi
 
 ## Remove named volumes
 if [ "$REMOVE_VOLUMES" = true ]; then
-    /bin/bash -c 'docker volumes ls -qf "name=$2_" | xargs docker volume rm'
+    /bin/bash -c 'docker volumes ls -qf "name='$2'_" | xargs docker volume rm'
 fi
 
 if [ "$REMOVE_NETWORK" = true ]; then
-    /bin/bash -c 'docker network ls -qf "name=$2_" | xargs docker network rm'
+    /bin/bash -c 'docker network ls -qf "name='$2'_" | xargs docker network rm'
 fi
 
-/bin/bash -c 'docker ps -aqf "name=$2_*" | xargs docker rm'
+/bin/bash -c 'docker ps -aqf "name='$2'_*" | xargs docker rm'
