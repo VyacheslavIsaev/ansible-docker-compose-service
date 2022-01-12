@@ -13,7 +13,7 @@ RestartSec=2
 
 WorkingDirectory=/etc/docker/compose/%i
 
-ExecStartPre={{tools_path}}/pre-start.sh /etc/docker/compose/%i/service.conf %i
+ExecStartPre={{tools_path}}/pre-start.sh {{target_env_file}} %i
 
 ## Compose up
 {% if env_file is defined and env_file|length %}
@@ -23,7 +23,7 @@ ExecStart=/usr/local/bin/docker-compose up
 {% endif %}
 
 # Stop container
-ExecStop={{tools_path}}/stop.sh /etc/docker/compose/%i/service.conf
+ExecStop={{tools_path}}/stop.sh {{target_env_file}}
 
 [Install]
 WantedBy=multi-user.target
