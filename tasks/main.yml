@@ -19,6 +19,21 @@
     path: "{{services_root}}/"
     state: "directory"
 
+- name: Checking target environment file
+  set_fact:
+    target_env_file: ""
+  when: env_file == "" and target_env_file != ""
+
+- name: Configuring common config file
+  set_fact:
+    target_env_file: env_common_target_file
+  when: env_common
+
+- name: Configuring specific config file
+  set_fact:
+    target_env_file: env_specific_target_file
+  when: env_specific
+
 - name: Deploying environment file
   template:
     src:  "{{env_file}}"

@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [[ -f "$1" ]]; then
-    source $1
-fi
+NAME=$1
 
-NAME=$2
+if [[ -f "$2" ]]; then
+    source $2
+fi
 
 echo "Service name: $NAME"
 

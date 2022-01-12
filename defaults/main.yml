@@ -3,4 +3,8 @@
 env_file: ""
 services_root: "/etc/docker/compose"
 tools_path: "/etc/docker/compose/service_tools"
-target_env_file: "{{services_root}}/.env"
+target_env_file: ""
+env_common: true
+env_specific: false
+env_specific_target_file: /etc/docker/compose/%i/service.conf
+env_common_target_file: "{{services_root}}/.env"
