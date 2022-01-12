@@ -27,12 +27,12 @@
 - name: Configuring common config file
   set_fact:
     target_env_file: "{{env_common_target_file}}"
-  when: env_common
+  when: env_common and env_file != ""
 
 - name: Configuring specific config file
   set_fact:
     target_env_file: "{{env_specific_target_file}}"
-  when: env_specific
+  when: env_specific and env_file != ""
 
 - name: Deploying environment file
   template:
